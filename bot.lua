@@ -1,4 +1,5 @@
 local discordia = require('discordia')
+discordia.extensions() -- load all helpful extensions
 
 -- For reading private key
 function readAll(file)
@@ -10,46 +11,42 @@ end
 
 local client = discordia.Client()
 
+local prefix = "!"
+local commands = {
+	[prefix .. "ping"] = {
+		description = "Answers with pong.",
+		exec = function(message)
+			message.channel:send("Pong!")
+		end
+	},
+	[prefix .. "hello"] = {
+		description = "Answers with world.",
+		exec = function(message)
+			message.channel:send("world!")
+		end
+	}
+}
+
+
 client:on('ready', function()
 	print('Logged in as '.. client.user.username)
 end)
 
-client:on('messageCreate', function(message)
-	if message.content == '!ping' then
-		message.channel:send('Pong!')
+client:on("messageCreate", function(message)
+	local args = message.content:split(" ") -- split all arguments into a table
+
+	local command = commands[args[1]]
+	if command then -- ping or hello
+		command.exec(message) -- execute the command
 	end
 
-	if message.content == "!embed" then
-		message:reply {
-			embed = {
-				title = "Embed Title",
-				description = "Here is my fancy description!",
-				author = {
-					name = message.author.username,
-					icon_url = message.author.avatarURL
-				},
-				fields = { -- array of fields
-					{
-						name = "Field 1",
-						value = "This is some information",
-						inline = true
-					},
-					{
-						name = "Field 2",
-						value = "This is some more information",
-						inline = false
-					}
-				},
-				footer = {
-					text = "Created with Discordia"
-				},
-				image = {
-					url = "https://i.imgur.com/Pna4buF.jpeg"
-			  	},
-				color = discordia.Color.fromRGB(0, 0, 218).value -- side bar colour
-			},
-			file = "test.png"
-		}
+	if args[1] == prefix.."help" then -- display all the commands
+		local output = {}
+		for word, tbl in pairs(commands) do
+			table.insert(output, "Command: " .. word .. "\nDescription: " .. tbl.description)
+		end
+
+		message:reply(table.concat(output, "\n\n"))
 	end
 end)
 
