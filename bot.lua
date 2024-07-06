@@ -13,16 +13,34 @@ local client = discordia.Client()
 
 local prefix = "!"
 local commands = {
-	[prefix .. "ping"] = {
+	["ping"] = {
 		description = "Answers with pong.",
 		exec = function(message)
 			message.channel:send("Pong!")
 		end
 	},
-	[prefix .. "hello"] = {
+	["hello"] = {
 		description = "Answers with world.",
 		exec = function(message)
 			message.channel:send("world!")
+		end
+	},
+	["prefix"] = {
+		description = "Set the prefix of the bot.",
+		exec = function(message)
+			message.channel:send("Changing...")
+			local args = message.content:split(" ")
+
+			if args[2] then
+				if string.len(args[2]) == 1 then
+					message.channel:send("Changed prefix to " .. args[2])
+					prefix = args[2]
+				else
+					message.channel:send("The prefix should be 1 character long")
+				end
+			else
+				message.channel:send("Please provide a prefix after " .. prefix .. "prefix")
+			end
 		end
 	}
 }
@@ -35,15 +53,18 @@ end)
 client:on("messageCreate", function(message)
 	local args = message.content:split(" ") -- split all arguments into a table
 
-	local command = commands[args[1]]
-	if command then -- ping or hello
-		command.exec(message) -- execute the command
+	local command = commands[string.sub(args[1], string.len(prefix) + 1)] -- get the command without the prefix, because no prefix in table
+
+	if command then -- valid command
+		if string.sub(args[1],1,1) == prefix then -- check if it started with the right prefix if it's valid
+			command.exec(message) -- execute the command
+		end
 	end
 
 	if args[1] == prefix.."help" then -- display all the commands
 		local output = ""
 		for word, tbl in pairs(commands) do
-			output = output .. word .. " - " .. tbl.description .. "\n"
+			output = output .. prefix .. word .. " - " .. tbl.description .. "\n"
 		end
 
 		help_embed = {
