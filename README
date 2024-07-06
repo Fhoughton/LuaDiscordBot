@@ -6,4 +6,5 @@
 - Create a file called ```private_key.txt``` and paste in your application private key
 
 # Usage
-To run the bot execute ```luvit bot.lua```
+- To run the bot execute ```luvit bot.lua```
+- To see the command list type ```!help``` in a channel with the bot
