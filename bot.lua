@@ -43,7 +43,10 @@ client:on('messageCreate', function(message)
 				footer = {
 					text = "Created with Discordia"
 				},
-				color = 0x000000 -- hex color code
+				image = {
+					url = "https://i.imgur.com/Pna4buF.jpeg"
+			  	},
+				color = discordia.Color.fromRGB(0, 0, 218).value -- side bar colour
 			},
 			file = "test.png"
 		}
