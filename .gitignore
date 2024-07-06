@@ -1,6 +1,6 @@
 *.exe
 deps
-private_key.txt
+token.txt
 test.png
 gateway.json
 discordia.log

@@ -14,7 +14,7 @@
 - Run ```lit install SinisterRectus/discordia``` to acquire discordia, a lua discord api wrapper
 - Run ```lit install cyrilis/request``` to acquire the luvit-request, for http requests
 - Create an app and find its private key (see: https://discord.com/developers/docs/quick-start/getting-started)
-- Create a file called ```private_key.txt``` and paste in your application private key
+- Create a file called ```token.txt``` and paste in your bots token
 
 ## Usage
 - To run the bot execute ```luvit bot.lua```

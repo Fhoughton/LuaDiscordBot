@@ -77,6 +77,6 @@ client:on("messageCreate", function(message)
 	end
 end)
 
-local private_key = readAll("private_key.txt")
+local bot_token = readAll("token.txt")
 
-client:run("Bot " .. private_key)
+client:run("Bot " .. bot_token)
