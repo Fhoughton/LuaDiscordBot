@@ -1,4 +1,5 @@
 local discordia = require('discordia')
+local request  = require("request")
 
 -- For reading private key
 function readAll(file)
@@ -6,6 +7,26 @@ function readAll(file)
     local content = f:read("*all")
     f:close()
     return content
+end
+
+-- Uploads a file to a temporary file service, returning the url
+-- Used for fields which accept url images only, not raw data
+function uploadFile(file)
+	result_url = ""
+
+	request.post("https://litterbox.catbox.moe/resources/internals/api.php")
+	:set("Content-Type", "text/html; charset=UTF-8")
+	:send({
+		foo = "bar",
+		reqtype = "fileupload",
+		time = "1h",
+		fileToUpload="@test.png"
+	})
+	:done( function(err, res) 
+		result_url = res.body
+	end)
+
+	return result_url
 end
 
 local client = discordia.Client()
@@ -54,5 +75,8 @@ client:on('messageCreate', function(message)
 end)
 
 local private_key = readAll("private_key.txt")
+
+local test = uploadFile("test.png")
+print(test)
 
 client:run("Bot " .. private_key)
