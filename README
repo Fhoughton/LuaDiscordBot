@@ -1,0 +1,8 @@
+# Setup
+- Install [luvit](https://luvit.io/), a fork of lua with asynchronous I/O
+- Run ```lit install SinisterRectus/discordia``` to acquire discordia, a lua discord api wrapper
+- Create an app and find its private key (see: https://discord.com/developers/docs/quick-start/getting-started)
+- Create a file called ```private_key.txt``` and paste in your application private key
+
+# Usage
+To run the bot execute ```luvit bot.lua```
