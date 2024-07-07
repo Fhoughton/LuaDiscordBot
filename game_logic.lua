@@ -23,6 +23,12 @@ function processInput(user, input)
 end
 
 function processInstruction(input_stack, input)
+    if tonumber(input) then
+        table.insert(input_stack, tonumber(input))
+    else
+
+    end
+
     return input_stack
 end
 
