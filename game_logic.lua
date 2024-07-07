@@ -25,3 +25,18 @@ end
 function processInstruction(input_stack, input)
     return input_stack
 end
+
+-- Converts some stack e.g. {1,2,3} to a string [1]\n[2]\n[3]\n
+function prettyPrintStack(stack)
+    local output = ""
+
+    for index, item in pairs(stack) do
+        output = output .. "[ " .. item .. " ]\n"
+    end
+
+    if output == "" then
+        output = "<Empty>"
+    end
+
+    return output
+end

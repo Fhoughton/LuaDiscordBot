@@ -11,9 +11,38 @@ function readAll(file)
     return content
 end
 
+-- Displays a particular game state, given a message context (for the channel to reply to)
+function displayState(message, state)
+	help_embed = {
+		title = "Level 1",
+		description = "Keep it simple",
+		fields = { -- array of fields#
+			{
+				name = "Goal:",
+				value = "- 5 Moves\n- Add to 12",
+				inline = true
+			},
+			{
+				name = "Options",
+				value = "4 1 2 | + *",
+				inline = false
+			},
+			{
+				name = "Stack",
+				value = prettyPrintStack(state["stack"]),
+				inline = false
+			}
+		},
+		color = discordia.Color.fromRGB(114, 137, 218).value
+	}
+
+	message:reply { embed = help_embed }
+end
+
 local client = discordia.Client()
 
 local prefix = "!"
+
 local commands = {
 	["about"] = {
 		description = "Answers with world.",
@@ -41,30 +70,11 @@ local commands = {
 	["start"] = {
 		description = "Set the prefix of the bot.",
 		exec = function(message)
-			help_embed = {
-				title = "Level 1",
-				description = "Keep it simple",
-				fields = { -- array of fields#
-					{
-						name = "Goal:",
-						value = "- 5 Moves\n- Add to 12",
-						inline = true
-					},
-					{
-						name = "Options",
-						value = "4 1 2 | + *",
-						inline = false
-					},
-					{
-						name = "Stack",
-						value = "<Empty>",
-						inline = false
-					}
-				},
-				color = discordia.Color.fromRGB(114, 137, 218).value
-			}
-	
-			message:reply { embed = help_embed }
+			local state = processInput(message.author.id, args[2])
+			displayState(
+				message,
+				{ ["level"] = 1, ["stack"] = {} }
+			)
 		end
 	},
 	["move"] = {
@@ -73,7 +83,7 @@ local commands = {
 			local args = message.content:split(" ")
 
 			local state = processInput(message.author.id, args[2])
-			print(state)
+			displayState(message, state)
 		end
 	},
 	["prefix"] = {
