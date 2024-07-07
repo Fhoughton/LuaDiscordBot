@@ -25,6 +25,35 @@ local commands = {
 			message.channel:send("world!")
 		end
 	},
+	["test"] = {
+		description = "Answers with world.",
+		exec = function(message)
+			help_embed = {
+				title = "Level 1",
+				description = "Keep it simple",
+				fields = { -- array of fields
+					{
+						name = "Goal:",
+						value = "- 5 Moves\n- Add to 12",
+						inline = true
+					},
+					{
+						name = "Options",
+						value = "4 1 2 | + + *",
+						inline = false
+					},
+					{
+						name = "Stack",
+						value = "<Empty>",
+						inline = false
+					}
+				},
+				color = discordia.Color.fromRGB(114, 137, 218).value
+			}
+	
+			message:reply { embed = help_embed }
+		end
+	},
 	["prefix"] = {
 		description = "Set the prefix of the bot.",
 		exec = function(message)
