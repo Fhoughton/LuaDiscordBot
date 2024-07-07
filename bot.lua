@@ -25,6 +25,30 @@ local commands = {
 			message.channel:send("world!")
 		end
 	},
+	["intro"] = {
+		description = "Answers with world.",
+		exec = function(message)
+			help_embed = {
+				title = "Story",
+				description = "You are the brother of a recently dead famous inventor and mathmetician. He has left behind his complex research, which he conducted using his own special mathematical techniques, and a little robot to help solve them.\n\nYou must work with the robot by issuing it commands to solve his incomplete theorems, revolutionising the world of mathematics. The robot works by processing stacks of paper. Type \"help\" to read the robots instructions.",
+				color = discordia.Color.fromRGB(114, 137, 218).value
+			}
+	
+			message:reply { embed = help_embed }
+		end
+	},
+	["instructions"] = {
+		description = "Answers with world.",
+		exec = function(message)
+			help_embed = {
+				title = "Gigabit Instructions",
+				description = "Hello, I am Gigabit.\n\nI do math with stacks of paper. For example if you give me 2 and then 3 I will place 2 at the bottom of the stack and 3 on the top. \n[ 3 ]\n[ 2 ]\n\nThen if you give me a plus I will add the top 2 items and put the result back on the top. So 3+2 is 5 so the top is now 5. \n[ 5 ]\n\n To submit an answer to a problem type \"submit\", to start solving the first puzzle type \"start\".",
+				color = discordia.Color.fromRGB(114, 137, 218).value
+			}
+	
+			message:reply { embed = help_embed }
+		end
+	},
 	["test"] = {
 		description = "Answers with world.",
 		exec = function(message)
@@ -39,7 +63,7 @@ local commands = {
 					},
 					{
 						name = "Options",
-						value = "4 1 2 | + + *",
+						value = "4 1 2 | + *",
 						inline = false
 					},
 					{
