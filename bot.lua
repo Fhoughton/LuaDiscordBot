@@ -1,6 +1,8 @@
 local discordia = require('discordia')
 discordia.extensions() -- load all helpful extensions
 
+require('game_logic')
+
 -- For reading private key
 function readAll(file)
     local f = assert(io.open(file, "rb"))
@@ -65,10 +67,18 @@ local commands = {
 			message:reply { embed = help_embed }
 		end
 	},
+	["move"] = {
+		description = "Set the prefix of the bot.",
+		exec = function(message)
+			local args = message.content:split(" ")
+
+			local state = processInput(message.author.id, args[2])
+			print(state)
+		end
+	},
 	["prefix"] = {
 		description = "Set the prefix of the bot.",
 		exec = function(message)
-			message.channel:send("Changing...")
 			local args = message.content:split(" ")
 
 			if args[2] then
