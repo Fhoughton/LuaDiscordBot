@@ -2,3 +2,4 @@
 - Make it human readable, about a robot who works with paper stacks
 - Show stack at each step and let user do multiple steps
 - Should be about a set of inputs to a set out outputs
+- Use discord reactions for inputs!?! So can react with a 1 to enter a 1 and shit!?!
