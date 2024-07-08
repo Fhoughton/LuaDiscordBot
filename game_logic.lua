@@ -5,6 +5,22 @@ local games = {
     --}
 }
 
+local levels = {
+    [1] = {
+        ["ops"] = {"*","+"},
+        ["numbers"] = {1,2,4}
+    }
+}
+
+function table.contains(table, element)
+    for _, value in pairs(table) do
+      if value == element then
+        return true
+      end
+    end
+    return false
+end  
+
 function processInput(user, input)
     if input and user then
         if not games[user] then
@@ -15,16 +31,25 @@ function processInput(user, input)
         end
 
         user_game = games[user]
-        new_stack = processInstruction(user_game["stack"], input)
+        new_stack = processInstruction(user_game, input)
         user_game["stack"] = new_stack
         
         return user_game
     end
 end
 
-function processInstruction(input_stack, input)
-    if tonumber(input) then
-        table.insert(input_stack, tonumber(input))
+function processInstruction(state, input)
+    local input_stack = state["stack"]
+
+    local input_asnum = tonumber(input)
+    if input_asnum then
+        state_level = state["level"]
+
+        level_data = levels[state_level]
+
+        if table.contains(level_data["numbers"], input_asnum) then
+            table.insert(input_stack, input_asnum)
+        end
     else
 
     end
