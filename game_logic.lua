@@ -9,8 +9,10 @@ local games = {
 
 local levels = {
     [1] = {
+        ["description"] = "Keep it simple"
         ["ops"] = {"*","+"},
         ["numbers"] = {1,2,4}
+        ["goal"] = 12
     }
 }
 

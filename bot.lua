@@ -57,7 +57,7 @@ local commands = {
 
 			help_embed = {
 				title = "Gigabit Instructions",
-				description = "Hello, I am Gigabit.\n\nI do math with stacks of paper. For example if you give me 2 and then 3 I will place 2 at the bottom of the stack and 3 on the top. \n[ 3 ]\n[ 2 ]\n\nThen if you give me a plus I will add the top 2 items and put the result back on the top. So 3+2 is 5 so the top is now 5. \n[ 5 ]\n\n To submit an answer to a problem type \"!submit\", to start solving the first puzzle type \"!start\" and then \"!move 2\" to put 2 on the stack.",
+				description = "Hello, I am Gigabit.\n\nI do math with stacks of paper. For example if you give me 2 and then 3 I will place 2 at the bottom of the stack and 3 on the top. \n[ 3 ]\n[ 2 ]\n\nThen if you give me a plus I will add the top 2 items and put the result back on the top. So 3+2 is 5 so the top is now 5. \n[ 5 ]\n\n To start solving the first puzzle type \"!start\" and then \"!move 2\" to put 2 on the stack.",
 				color = discordia.Color.fromRGB(114, 137, 218).value,
 				footer = {
 					text = "Note: For a list of all instructions type !help"
