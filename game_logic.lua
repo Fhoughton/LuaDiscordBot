@@ -1,11 +1,6 @@
 -- TODO: Add better message reporting for erroneous states e.g. player enters invalid number not in level
 
-local games = {
-    --010101 = {
-    --    level = 1
-    --    stack = []
-    --}
-}
+local games = {}
 
 levels = {
     [1] = {
