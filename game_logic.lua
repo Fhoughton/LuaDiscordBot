@@ -7,13 +7,36 @@ local games = {
     --}
 }
 
-local levels = {
+levels = {
     [1] = {
-        ["description"] = "Keep it simple"
+        ["description"] = "Keep it simple",
         ["ops"] = {"*","+"},
-        ["numbers"] = {1,2,4}
-        ["goal"] = 12
-    }
+        ["numbers"] = {1,2,4},
+        ["goal"] = 12,
+        ["moves"] = 5
+    },
+    [2] = {
+        ["description"] = "Multiply, add, add",
+        ["ops"] = {"*","+","-"},
+        ["numbers"] = {100, 2, 9, 10, 4, 1},
+        ["goal"] = 129,
+        ["moves"] = 8
+    },
+    [3] = {
+        ["description"] = "A little bit trickier",
+        ["ops"] = {"*","+","-"},
+        ["numbers"] = {50, 75, 5, 1, 2, 10},
+        ["goal"] = 542,
+        ["moves"] = 12
+    },
+    [4] = {
+        ["description"] = "Headscratcher",
+        ["ops"] = {"*","+","-"},
+        ["numbers"] = {25, 75, 100, 50, 7, 1},
+        ["goal"] = 340,
+        ["moves"] = 12
+    },
+
 }
 
 function table.contains(table, element)
@@ -37,6 +60,17 @@ function processInput(user, input)
         user_game = games[user]
         new_stack = processInstruction(user_game, input)
         user_game["stack"] = new_stack
+
+        -- Check if user has beaten level and if so progress
+        state_level = user_game["level"]
+        level_data = levels[state_level]
+
+        if new_stack[1] == level_data["goal"] then
+            --displayState(user_game)
+            --message.channel:send('Level complete!')
+            user_game["level"] = user_game["level"] + 1
+            user_game["stack"] = {}
+        end
         
         return user_game
     end
@@ -64,6 +98,7 @@ function processInstruction(state, input)
             -- Process symbol, push result to front
             if input == "+" then table.insert(input_stack, 1, top_stack_item + second_stack_item)
             elseif input == "*" then table.insert(input_stack, 1, top_stack_item * second_stack_item)
+            elseif input == "-" then table.insert(input_stack, 1, top_stack_item - second_stack_item)
             else return input_stack -- No operation done, just exit so we can be generic after
             end
 

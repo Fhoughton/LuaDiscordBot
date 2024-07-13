@@ -13,13 +13,15 @@ end
 
 -- Displays a particular game state, given a message context (for the channel to reply to)
 function displayState(message, state)
+	local level_data = levels[state["level"]]
+
 	help_embed = {
-		title = "Level 1",
-		description = "Keep it simple",
+		title = "Level " .. tostring(state["level"]),
+		description = level_data["description"],
 		fields = { -- array of fields#
 			{
 				name = "Goal:",
-				value = "- 5 Moves\n- Add to 12",
+				value = "- " .. tostring(level_data["moves"]) .. " Moves\n- Add to " .. tostring(level_data["goal"]),
 				inline = true
 			},
 			{
