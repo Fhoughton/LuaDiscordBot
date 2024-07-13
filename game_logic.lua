@@ -72,6 +72,12 @@ function processInput(message, input)
             user_game["level"] = user_game["level"] + 1
             user_game["stack"] = {}
         end
+
+        if user_game["level"] == #levels + 1 then
+            message.channel:send('Congratulations, you solved every equation from your brothers\' notes, helping push the world of science forward 30 years!')
+            message.channel:send('<The robot resets>')
+            user_game["level"] = 1
+        end
         
         return user_game
     end
