@@ -36,7 +36,27 @@ levels = {
         ["goal"] = 340,
         ["moves"] = 12
     },
-
+    [5] = {
+        ["description"] = "The particle collision theorem",
+        ["ops"] = {"*","+"},
+        ["numbers"] = {8, 5, 4, 3},
+        ["goal"] = 859,
+        ["moves"] = 11
+    },
+    [6] = {
+        ["description"] = "Subtracting the atom",
+        ["ops"] = {"*","+","-"},
+        ["numbers"] = {4, 6, 5, 7, 1},
+        ["goal"] = 416,
+        ["moves"] = 14
+    },
+    [7] = {
+        ["description"] = "A relaxing end",
+        ["ops"] = {"*","+","-"},
+        ["numbers"] = {5, 10, 7, 2},
+        ["goal"] = 749,
+        ["moves"] = 13
+    },
 }
 
 function table.contains(table, element)
