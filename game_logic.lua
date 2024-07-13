@@ -48,7 +48,9 @@ function table.contains(table, element)
     return false
 end  
 
-function processInput(user, input)
+function processInput(message, input)
+    local user = message.author.id
+
     if input and user then
         if not games[user] then
             games[user] = {
@@ -66,8 +68,7 @@ function processInput(user, input)
         level_data = levels[state_level]
 
         if new_stack[1] == level_data["goal"] then
-            --displayState(user_game)
-            --message.channel:send('Level complete!')
+            message.channel:send('Level complete!')
             user_game["level"] = user_game["level"] + 1
             user_game["stack"] = {}
         end

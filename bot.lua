@@ -26,7 +26,7 @@ function displayState(message, state)
 			},
 			{
 				name = "Options",
-				value = "4 1 2 | + *",
+				value = table.concat(level_data["numbers"], " ") .. " | " .. table.concat(level_data["ops"], " "),
 				inline = false
 			},
 			{
@@ -72,7 +72,7 @@ local commands = {
 	["start"] = {
 		description = "Set the prefix of the bot.",
 		exec = function(message)
-			local state = processInput(message.author.id, args[2])
+			-- local state = processInput(message, args[2])
 			displayState(
 				message,
 				{ ["level"] = 1, ["stack"] = {} }
@@ -84,7 +84,7 @@ local commands = {
 		exec = function(message)
 			local args = message.content:split(" ")
 
-			local state = processInput(message.author.id, args[2])
+			local state = processInput(message, args[2], displayState)
 			displayState(message, state)
 		end
 	},
