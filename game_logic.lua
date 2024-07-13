@@ -77,6 +77,12 @@ function processInput(message, input)
     end
 end
 
+function tablelength(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+end
+  
 function processInstruction(state, input)
     local input_stack = state["stack"]
 
@@ -92,31 +98,42 @@ function processInstruction(state, input)
         end
     else
         -- If it's a symbol and it's valid for that level try to process it on the stack, all take two arguments
-        local top_stack_item = input_stack[1]
-        local second_stack_item = input_stack[2]
+        local top_stack_item = input_stack[tablelength(input_stack)]
+        local second_stack_item = input_stack[tablelength(input_stack) - 1]
 
         if top_stack_item and second_stack_item then
             -- Process symbol, push result to front
-            if input == "+" then table.insert(input_stack, 1, top_stack_item + second_stack_item)
-            elseif input == "*" then table.insert(input_stack, 1, top_stack_item * second_stack_item)
-            elseif input == "-" then table.insert(input_stack, 1, top_stack_item - second_stack_item)
+            if input == "+" then table.insert(input_stack, top_stack_item + second_stack_item)
+            elseif input == "*" then table.insert(input_stack, top_stack_item * second_stack_item)
+            elseif input == "-" then table.insert(input_stack, top_stack_item - second_stack_item)
             else return input_stack -- No operation done, just exit so we can be generic after
             end
 
             -- Remove two items below top to remove old data (operands of the symbol)
-            table.remove(input_stack, 2) -- [A+B,A,B] --> [A+B,B]
-            table.remove(input_stack, 2) -- [A+B,B] --> [A+B]
+            table.remove(input_stack, tablelength(input_stack) - 1) -- [A+B,A,B] --> [A+B,B]
+            table.remove(input_stack, tablelength(input_stack) - 1) -- [A+B,B] --> [A+B]
         end
     end
 
     return input_stack
 end
 
+local function reversedipairsiter(t, i)
+    i = i - 1
+    if i ~= 0 then
+        return i, t[i]
+    end
+end
+function reversedipairs(t)
+    return reversedipairsiter, t, #t + 1
+end
+
+
 -- Converts some stack e.g. {1,2,3} to a string [1]\n[2]\n[3]\n
 function prettyPrintStack(stack)
     local output = ""
 
-    for index, item in pairs(stack) do
+    for index, item in reversedipairs(stack) do
         output = output .. "[ " .. item .. " ]\n"
     end
 
