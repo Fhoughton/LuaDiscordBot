@@ -21,10 +21,6 @@ This bot is an interactive bot for the chat platform [Discord](https://discord.c
 - 5 commands to interact with the bot/game state
 - Prefix switching
 
-<p align="center">
-  <img src="https://github.com/ai/size-limit/blob/main/img/example.png" alt="Size Limit CLI" width="738">
-</p>
-
 ## Installation
 - Install [luvit](https://luvit.io/), a fork of lua with asynchronous I/O
 - Run ```lit install SinisterRectus/discordia``` to acquire discordia, a lua discord api wrapper
